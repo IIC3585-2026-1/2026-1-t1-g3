@@ -1,0 +1,119 @@
+:root {
+    /* Globals variables */
+    --card-size: 100px;
+    --gap: 15px;
+    --main-color: #6c5ce7;
+    --bg: #1e1e2f;
+  }
+  
+  /* Flexbox (center everything in the body) */
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: var(--bg);
+    color: white;
+    font-family: sans-serif;
+  }
+  
+  /* Grid (board layout with 4 columns) */
+  .board {
+    display: grid;
+    grid-template-columns: repeat(4, var(--card-size));
+    gap: var(--gap);
+  }
+  
+  /* Card container */
+  .card {
+    width: var(--card-size);
+    height: var(--card-size);
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  
+  /* Inner flip element */
+  .inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+  
+  /* Flip effect */
+
+  /*https://developer.mozilla.org/es/docs/Web/CSS/Reference/Values/transform-function/rotate3d*/
+  .card.flipped .inner {
+    transform: rotate3d(0, 1, 0, 180deg);
+  }
+  
+  /* Faces */
+  .front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 10px;
+    backface-visibility: hidden;
+  }
+  
+  /*we override the background color of the front face*/
+  .front {
+    background: var(--main-color);
+  }
+  
+  .back {
+    background: #00b894;
+    transform: rotate3d(0, 1, 0, 180deg);
+  }
+  
+  /* Match animation */
+  /*https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation*/
+  .card.match {
+    animation: glow 0.6s ease;
+  }
+  /*https://developer.mozilla.org/es/docs/Web/CSS/Reference/At-rules/@keyframes*/
+
+  @keyframes glow {
+    0% { box-shadow: 0 0 0px #00ffcc; }
+    25% { box-shadow: 0 0 30px #00ffcc; }
+    50% { box-shadow: 0 0 50px #00ffcc; }
+    75% { box-shadow: 0 0 30px #00ffcc; }
+    100% { box-shadow: 0 0 0px #00ffcc; }
+  }
+  
+  /* Wrong animation */
+  .card.wrong {
+    animation: shake 0.5s;
+  }
+  
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+  
+  
+  /* Container Query */
+  .game {
+    container-type: inline-size;
+  }
+  
+  /*we set the grid template columns to 2 columns if the width is less than 400px*/
+  @container (max-width: 400px) {
+    .board {
+      grid-template-columns: repeat(2, var(--card-size));
+    }
+  }
+  
+  .card {
+    &.flipped {
+      z-index: 2;
+    }
+  }
