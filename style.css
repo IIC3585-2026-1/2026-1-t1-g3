@@ -136,6 +136,10 @@
     font-weight: 700;
   }
 
+  .win-button {
+    margin-top: 18px;
+  }
+
   .board {
     align-items: center;
     display: grid;

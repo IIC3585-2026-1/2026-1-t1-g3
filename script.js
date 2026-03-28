@@ -2,6 +2,7 @@ const board = document.querySelector(".board");
 const movesElement = document.querySelector("#moves");
 const matchesElement = document.querySelector("#matches");
 const restartButton = document.querySelector(".game-button");
+const winRestartButton = document.querySelector(".win-button");
 const toastElement = document.querySelector("#toast");
 const winNotificationElement = document.querySelector("#win-notification");
 
@@ -119,5 +120,6 @@ function restartGame() {
 }
 
 restartButton.addEventListener("click", restartGame);
+winRestartButton.addEventListener("click", restartGame);
 
 createBoard();
