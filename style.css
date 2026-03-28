@@ -141,10 +141,12 @@
   }
 
   .board {
+    container-type: inline-size;
     align-items: center;
     display: grid;
     grid-template-columns: repeat(4, var(--card-size));
     gap: var(--gap);
+    justify-content: center;
   }
   
   /* Card container */
@@ -255,10 +257,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: min(100%, 520px);
   }
   
   .card {
     &.flipped {
       z-index: 2;
+    }
+  }
+
+  @media (max-width: 760px) {
+    :root {
+      --card-size: 82px;
+      --gap: 10px;
+    }
+
+    .board {
+      grid-template-columns: repeat(2, var(--card-size));
+    }
+  }
+
+  @container (max-width: 380px) {
+    .card {
+      width: 72px;
+      height: 72px;
+    }
+
+    .front,
+    .back {
+      font-size: 1.5rem;
     }
   }
