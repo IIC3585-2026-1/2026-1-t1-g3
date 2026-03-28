@@ -94,7 +94,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    background: rgba(10, 10, 20, 0.72);
+    background: rgba(0, 184, 148, 0.25);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     opacity: 0;
