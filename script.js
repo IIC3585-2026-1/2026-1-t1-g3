@@ -2,6 +2,7 @@ const board = document.querySelector(".board");
 const movesElement = document.querySelector("#moves");
 const matchesElement = document.querySelector("#matches");
 const restartButton = document.querySelector(".game-button");
+const toastElement = document.querySelector("#toast");
 
 const symbols = ["python", "c#", "c++", "cobol", "lisp", "java", "ruby", "go"];
 
@@ -10,6 +11,7 @@ let second = null;
 let lock = false;
 let moves = 0;
 let matches = 0;
+let toastTimeoutId = null;
 
 function shuffle(array) {
   const copy = [...array];
@@ -84,6 +86,19 @@ function resetTurn() {
   lock = false;
 }
 
+function showToast(message) {
+  toastElement.textContent = message;
+  toastElement.classList.add("show");
+
+  if (toastTimeoutId) {
+    clearTimeout(toastTimeoutId);
+  }
+
+  toastTimeoutId = setTimeout(() => {
+    toastElement.classList.remove("show");
+  }, 1800);
+}
+
 function restartGame() {
   moves = 0;
   matches = 0;
@@ -91,6 +106,7 @@ function restartGame() {
   matchesElement.textContent = matches;
   resetTurn();
   createBoard();
+  showToast("Juego reiniciado");
 }
 
 restartButton.addEventListener("click", restartGame);
