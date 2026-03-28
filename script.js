@@ -1,6 +1,7 @@
 const board = document.querySelector(".board");
 const movesElement = document.querySelector("#moves");
 const matchesElement = document.querySelector("#matches");
+const restartButton = document.querySelector(".game-button");
 
 const symbols = ["python", "c#", "c++", "cobol", "lisp", "java", "ruby", "go"];
 
@@ -82,5 +83,16 @@ function resetTurn() {
   second = null;
   lock = false;
 }
+
+function restartGame() {
+  moves = 0;
+  matches = 0;
+  movesElement.textContent = moves;
+  matchesElement.textContent = matches;
+  resetTurn();
+  createBoard();
+}
+
+restartButton.addEventListener("click", restartGame);
 
 createBoard();
