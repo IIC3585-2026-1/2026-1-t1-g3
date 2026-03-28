@@ -190,6 +190,7 @@
     font-size: 2rem;
     border-radius: 10px;
     backface-visibility: hidden;
+    transition: background-color 0.25s ease;
   }
   
   /*we override the background color of the front face*/
@@ -224,6 +225,10 @@
   .back {
     background: #00b894;
     transform: rotate3d(0, 1, 0, 180deg);
+  }
+
+  .card.wrong .back {
+    background: #e74c3c;
   }
   
   /* Match animation */
