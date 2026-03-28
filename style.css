@@ -4,6 +4,8 @@
     --gap: 15px;
     --main-color: #6c5ce7;
     --bg: #1e1e2f;
+  --matches: 0;
+  --total-pairs: 8;
   }
   
   /* Flexbox (center everything in the body) */
@@ -54,6 +56,22 @@
 
   .game-info p {
     margin: 0;
+  }
+
+  .score-track {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+    background: rgba(255, 255, 255, 0.18);
+    overflow: hidden;
+  }
+
+  .score-fill {
+    height: 100%;
+    width: calc((var(--matches)) * 100% / var(--total-pairs));
+    background: linear-gradient(90deg, #00b894, #00cec9, #6c5ce7);
+    transition: width 0.3s ease;
   }
 
   .game-button {

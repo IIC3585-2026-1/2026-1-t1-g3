@@ -1,6 +1,8 @@
 const board = document.querySelector(".board");
 const movesElement = document.querySelector("#moves");
 const matchesElement = document.querySelector("#matches");
+const scoreElement = document.querySelector("#score");
+const gameElement = document.querySelector(".game");
 const restartButton = document.querySelector(".game-button");
 const winRestartButton = document.querySelector(".win-button");
 const toastElement = document.querySelector("#toast");
@@ -13,6 +15,8 @@ let second = null;
 let lock = false;
 let moves = 0;
 let matches = 0;
+let score = 0;
+let streak = 0;
 let toastTimeoutId = null;
 
 function shuffle(array) {
@@ -67,7 +71,10 @@ function handleCardClick(card) {
     first.classList.add("match");
     second.classList.add("match");
     matches += 1;
+    streak += 1;
+    score += 10 + (streak - 1) * 5;
     matchesElement.textContent = matches;
+    updateScoreUI();
     if (matches === symbols.length) {
       showWinNotification();
     }
@@ -75,6 +82,7 @@ function handleCardClick(card) {
     return;
   }
 
+  streak = 0;
   first.classList.add("wrong");
   second.classList.add("wrong");
 
@@ -89,6 +97,11 @@ function resetTurn() {
   first = null;
   second = null;
   lock = false;
+}
+
+function updateScoreUI() {
+  scoreElement.textContent = score;
+  gameElement.style.setProperty("--matches", matches);
 }
 
 function showToast(message) {
@@ -111,8 +124,11 @@ function showWinNotification() {
 function restartGame() {
   moves = 0;
   matches = 0;
+  score = 0;
+  streak = 0;
   movesElement.textContent = moves;
   matchesElement.textContent = matches;
+  updateScoreUI();
   resetTurn();
   winNotificationElement.classList.remove("show");
   createBoard();
@@ -123,3 +139,4 @@ restartButton.addEventListener("click", restartGame);
 winRestartButton.addEventListener("click", restartGame);
 
 createBoard();
+updateScoreUI();
