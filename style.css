@@ -44,7 +44,24 @@
   
   /* Grid (board layout with 4 columns) */
   .game-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
     font-weight: 700;
+  }
+
+  .game-info p {
+    margin: 0;
+  }
+
+  .game-button {
+    border: none;
+    border-radius: 999px;
+    padding: 10px 18px;
+    background: #00b894;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
   }
 
   .board {
