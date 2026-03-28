@@ -4,6 +4,10 @@
     --gap: 15px;
     --main-color: #6c5ce7;
     --bg: #1e1e2f;
+    --card-back-default: #2f3144;
+    --card-back-flipped: #4c566a;
+    --card-back-match: #00b894;
+    --card-back-wrong: #e74c3c;
   }
   
   /* Flexbox (center everything in the body) */
@@ -225,12 +229,20 @@
   }
   
   .back {
-    background: #00b894;
+    background: var(--card-back-default);
     transform: rotate3d(0, 1, 0, 180deg);
   }
 
+  .card.flipped .back {
+    background: var(--card-back-flipped);
+  }
+
+  .card.match .back {
+    background: var(--card-back-match);
+  }
+
   .card.wrong .back {
-    background: #e74c3c;
+    background: var(--card-back-wrong);
   }
   
   /* Match animation */
