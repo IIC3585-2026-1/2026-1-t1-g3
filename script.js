@@ -3,6 +3,7 @@ const movesElement = document.querySelector("#moves");
 const matchesElement = document.querySelector("#matches");
 const restartButton = document.querySelector(".game-button");
 const toastElement = document.querySelector("#toast");
+const winNotificationElement = document.querySelector("#win-notification");
 
 const symbols = ["python", "c#", "c++", "cobol", "lisp", "java", "ruby", "go"];
 
@@ -66,6 +67,9 @@ function handleCardClick(card) {
     second.classList.add("match");
     matches += 1;
     matchesElement.textContent = matches;
+    if (matches === symbols.length) {
+      showWinNotification();
+    }
     resetTurn();
     return;
   }
@@ -99,12 +103,17 @@ function showToast(message) {
   }, 1800);
 }
 
+function showWinNotification() {
+  winNotificationElement.classList.add("show");
+}
+
 function restartGame() {
   moves = 0;
   matches = 0;
   movesElement.textContent = moves;
   matchesElement.textContent = matches;
   resetTurn();
+  winNotificationElement.classList.remove("show");
   createBoard();
   showToast("Juego reiniciado");
 }
