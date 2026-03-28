@@ -268,7 +268,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: min(100%, 520px);
+    width: min(100%, 960px);
   }
   
   .card {
@@ -283,8 +283,18 @@
       --gap: 10px;
     }
 
+    h1 {
+      display: none;
+    }
+
     .board {
       grid-template-columns: repeat(2, var(--card-size));
+    }
+  }
+
+  @media (max-width: 400px) {
+    .game-info {
+      display: none;
     }
   }
 
