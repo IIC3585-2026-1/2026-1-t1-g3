@@ -167,6 +167,18 @@
       transform: scale(1.06);
 
     }
+
+    &.flipped .back {
+      background: var(--card-back-flipped);
+    }
+
+    &.match .back {
+      background: var(--card-back-match);
+    }
+
+    &.wrong .back {
+      background: var(--card-back-wrong);
+    }
   }
   
   /* Inner flip element */
@@ -231,18 +243,6 @@
   .back {
     background: var(--card-back-default);
     transform: rotate3d(0, 1, 0, 180deg);
-  }
-
-  .card.flipped .back {
-    background: var(--card-back-flipped);
-  }
-
-  .card.match .back {
-    background: var(--card-back-match);
-  }
-
-  .card.wrong .back {
-    background: var(--card-back-wrong);
   }
   
   /* Match animation */
