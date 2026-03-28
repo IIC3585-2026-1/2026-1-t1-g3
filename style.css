@@ -18,8 +18,35 @@
     color: white;
     font-family: sans-serif;
   }
+
+  h1 {
+    background: linear-gradient(
+      90deg,
+      #ff0000 0%,
+      #ff9900 16.66%,
+      #ffee00 33.33%,
+      #00cc66 50%,
+      #3399ff 66.66%,
+      #cc33ff 83.33%,
+      #ff0000 100%,
+      #ff9900 116.66%,
+      #ffee00 133.33%,
+      #00cc66 150%,
+      #3399ff 166.66%,
+      #cc33ff 183.33%,
+      #ff0000 200%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow-slide 2.5s linear infinite;
+  }
   
   /* Grid (board layout with 4 columns) */
+  .game-info {
+    font-weight: 700;
+  }
+
   .board {
     align-items: center;
     display: grid;
@@ -68,6 +95,30 @@
   .front {
     background: var(--main-color);
   }
+
+  .question-mark {
+    background: linear-gradient(
+      90deg,
+      #ff0000 0%,
+      #ff9900 16.66%,
+      #ffee00 33.33%,
+      #00cc66 50%,
+      #3399ff 66.66%,
+      #cc33ff 83.33%,
+      #ff0000 100%,
+      #ff9900 116.66%,
+      #ffee00 133.33%,
+      #00cc66 150%,
+      #3399ff 166.66%,
+      #cc33ff 183.33%,
+      #ff0000 200%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: rainbow-slide 2.5s linear infinite;
+  }
   
   .back {
     background: #00b894;
@@ -101,21 +152,16 @@
     75% { transform: translateX(-5px); }
     100% { transform: translateX(0); }
   }
+
+  @keyframes rainbow-slide {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
   
-  
-  /* Container Query */
   .game {
     display: flex;
     flex-direction: column;
     align-items: center;
-    container-type: inline-size;
-  }
-  
-  /*we set the grid template columns to 2 columns if the width is less than 400px*/
-  @container (max-width: 400px) {
-    .board {
-      grid-template-columns: repeat(2, var(--card-size));
-    }
   }
   
   .card {
