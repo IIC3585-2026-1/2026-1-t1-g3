@@ -155,6 +155,12 @@
     height: var(--card-size);
     perspective: 1000px;
     cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover{
+      transform: scale(1.06);
+
+    }
   }
   
   /* Inner flip element */
