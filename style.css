@@ -6,6 +6,8 @@
     --bg: #1e1e2f;
   --matches: 0;
   --total-pairs: 8;
+  --slot-step: 34px;
+  --slot-count: 8;
   }
   
   /* Flexbox (center everything in the body) */
@@ -19,6 +21,70 @@
     background: var(--bg);
     color: white;
     font-family: sans-serif;
+  }
+
+  .slot-machine {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 84px;
+    height: 340px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.32);
+    padding: 10px;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .slot-left {
+    left: max(8px, calc((100vw - min(100%, calc(4 * var(--card-size) + 3 * var(--gap) + 2rem))) / 3 - 42px));
+  }
+
+  .slot-right {
+    right: max(8px, calc((100vw - min(100%, calc(4 * var(--card-size) + 3 * var(--gap) + 2rem))) / 3 - 42px));
+  }
+
+  .slot-window {
+    position: relative;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    background: rgba(8, 12, 24, 0.7);
+  }
+
+  .slot-reel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: slot-spin 5.5s linear infinite;
+    will-change: transform;
+  }
+
+  .slot-right .slot-reel {
+    animation-duration: 6.2s;
+    animation-direction: reverse;
+  }
+
+  .slot-reel span {
+    width: 100%;
+    height: var(--slot-step);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+    text-shadow: 0 0 10px rgba(0, 255, 220, 0.3);
+  }
+
+  @keyframes slot-spin {
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(-1 * var(--slot-step) * var(--slot-count))); }
   }
 
   h1 {
@@ -364,6 +430,10 @@
     :root {
       --card-size: 82px;
       --gap: 10px;
+    }
+
+    .slot-machine {
+      display: none;
     }
 
     h1 {
