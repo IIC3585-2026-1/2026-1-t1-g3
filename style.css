@@ -94,6 +94,36 @@
     to { transform: translateY(calc(-1 * var(--slot-step) * var(--slot-count))); }
   }
 
+  @keyframes stat-green-flash {
+    0% {
+      color: white;
+      text-shadow: none;
+    }
+    50% {
+      color: #7dff7a;
+      text-shadow: 0 0 10px rgba(125, 255, 122, 0.55);
+    }
+    100% {
+      color: white;
+      text-shadow: none;
+    }
+  }
+
+  @keyframes stat-red-flash {
+    0% {
+      color: white;
+      text-shadow: none;
+    }
+    50% {
+      color: #ff7b7b;
+      text-shadow: 0 0 10px rgba(255, 123, 123, 0.55);
+    }
+    100% {
+      color: white;
+      text-shadow: none;
+    }
+  }
+
   h1 {
     white-space: nowrap;
     background: linear-gradient(
@@ -125,10 +155,18 @@
     gap: 20px;
     margin-bottom: 24px;
     font-weight: 700;
-  }
 
-  .game-info p {
-    margin: 0;
+    p {
+      margin: 0;
+
+      &.stat-flash {
+        animation: stat-green-flash 0.8s ease;
+      }
+
+      &.move-flash {
+        animation: stat-red-flash 0.8s ease;
+      }
+    }
   }
 
   .score-track {
