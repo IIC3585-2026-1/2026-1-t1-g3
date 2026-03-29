@@ -2,6 +2,9 @@ const board = document.querySelector(".board");
 const movesElement = document.querySelector("#moves");
 const matchesElement = document.querySelector("#matches");
 const scoreElement = document.querySelector("#score");
+const movesTextElement = movesElement.parentElement;
+const matchesTextElement = matchesElement.parentElement;
+const scoreTextElement = scoreElement.parentElement;
 const winScoreElement = document.querySelector("#win-score");
 const gameElement = document.querySelector(".game");
 const restartButton = document.querySelector(".game-button");
@@ -19,6 +22,8 @@ let matches = 0;
 let score = 0;
 let streak = 0;
 let toastTimeoutId = null;
+let scoreFlashTimeoutId = null;
+let movesFlashTimeoutId = null;
 
 function shuffle(array) {
   const copy = [...array];
@@ -76,6 +81,7 @@ function handleCardClick(card) {
     score += 10 + (streak - 1) * 5;
     matchesElement.textContent = matches;
     updateScoreUI();
+    flashMatchStats();
     if (matches === symbols.length) {
       showWinNotification();
     }
@@ -84,6 +90,7 @@ function handleCardClick(card) {
   }
 
   streak = 0;
+  flashWrongMove();
   first.classList.add("wrong");
   second.classList.add("wrong");
 
@@ -103,6 +110,32 @@ function resetTurn() {
 function updateScoreUI() {
   scoreElement.textContent = score;
   gameElement.style.setProperty("--matches", matches);
+}
+
+function flashMatchStats() {
+  matchesTextElement.classList.add("stat-flash");
+  scoreTextElement.classList.add("stat-flash");
+
+  if (scoreFlashTimeoutId) {
+    clearTimeout(scoreFlashTimeoutId);
+  }
+
+  scoreFlashTimeoutId = setTimeout(() => {
+    matchesTextElement.classList.remove("stat-flash");
+    scoreTextElement.classList.remove("stat-flash");
+  }, 650);
+}
+
+function flashWrongMove() {
+  movesTextElement.classList.add("move-flash");
+
+  if (movesFlashTimeoutId) {
+    clearTimeout(movesFlashTimeoutId);
+  }
+
+  movesFlashTimeoutId = setTimeout(() => {
+    movesTextElement.classList.remove("move-flash");
+  }, 650);
 }
 
 function showToast(message) {
