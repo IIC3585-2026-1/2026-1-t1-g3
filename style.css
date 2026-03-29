@@ -4,6 +4,10 @@
     --gap: 15px;
     --main-color: #6c5ce7;
     --bg: #1e1e2f;
+    --matches: 0;
+    --total-pairs: 8;
+    --slot-step: 34px;
+    --slot-count: 8;
     --card-back-default: #2f3144;
     --card-back-flipped: #4c566a;
     --card-back-match: #00b894;
@@ -21,6 +25,70 @@
     background: var(--bg);
     color: white;
     font-family: sans-serif;
+  }
+
+  .slot-machine {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 84px;
+    height: 340px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.32);
+    padding: 10px;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .slot-left {
+    left: max(8px, calc((100vw - min(100%, calc(4 * var(--card-size) + 3 * var(--gap) + 2rem))) / 3 - 42px));
+  }
+
+  .slot-right {
+    right: max(8px, calc((100vw - min(100%, calc(4 * var(--card-size) + 3 * var(--gap) + 2rem))) / 3 - 42px));
+  }
+
+  .slot-window {
+    position: relative;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    background: rgba(8, 12, 24, 0.7);
+  }
+
+  .slot-reel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: slot-spin 5.5s linear infinite;
+    will-change: transform;
+  }
+
+  .slot-right .slot-reel {
+    animation-duration: 6.2s;
+    animation-direction: reverse;
+  }
+
+  .slot-reel span {
+    width: 100%;
+    height: var(--slot-step);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+    text-shadow: 0 0 10px rgba(0, 255, 220, 0.3);
+  }
+
+  @keyframes slot-spin {
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(-1 * var(--slot-step) * var(--slot-count))); }
   }
 
   h1 {
@@ -58,6 +126,76 @@
 
   .game-info p {
     margin: 0;
+  }
+
+  .score-track {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+    background: rgba(255, 255, 255, 0.18);
+    overflow: hidden;
+  }
+
+  .score-fill {
+    height: 100%;
+    width: calc((var(--matches)) * 100% / var(--total-pairs));
+    background: linear-gradient(90deg, #00b894, #00cec9, #6c5ce7);
+    transition: width 0.3s ease;
+  }
+
+  .color-picker {
+    margin: 0 0 14px;
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .color-picker legend {
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 0 6px;
+  }
+
+  .color-picker input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .color-swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  #card-color-violet + .color-swatch { background: #6c5ce7; }
+  #card-color-mint + .color-swatch { background: #00b894; }
+  #card-color-ocean + .color-swatch { background: #0984e3; }
+  #card-color-orange + .color-swatch { background: #e17055; }
+  #card-color-rose + .color-swatch { background: #d63031; }
+  #card-color-lime + .color-swatch { background: #7fae2e; }
+
+  #card-color-violet:checked + .color-swatch,
+  #card-color-mint:checked + .color-swatch,
+  #card-color-ocean:checked + .color-swatch,
+  #card-color-orange:checked + .color-swatch,
+  #card-color-rose:checked + .color-swatch,
+  #card-color-lime:checked + .color-swatch {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.24);
   }
 
   .game-button {
@@ -213,7 +351,7 @@
   
   /*we override the background color of the front face*/
   .front {
-    background: var(--main-color);
+    background: var(--selected-main-color, var(--main-color));
   }
 
   .question-mark {
@@ -283,8 +421,16 @@
     flex-direction: column;
     align-items: center;
     /* We use the min function to make the game responsive */
+    --selected-main-color: var(--main-color);
     width: min(100%, calc(4 * var(--card-size) + 3 * var(--gap) + 2rem));
   }
+
+  .game:has(#card-color-violet:checked) { --selected-main-color: #6c5ce7; }
+  .game:has(#card-color-mint:checked) { --selected-main-color: #00b894; }
+  .game:has(#card-color-ocean:checked) { --selected-main-color: #0984e3; }
+  .game:has(#card-color-orange:checked) { --selected-main-color: #e17055; }
+  .game:has(#card-color-rose:checked) { --selected-main-color: #d63031; }
+  .game:has(#card-color-lime:checked) { --selected-main-color: #7fae2e; }
   
   .card {
     &.flipped {
@@ -296,6 +442,10 @@
     :root {
       --card-size: 82px;
       --gap: 10px;
+    }
+
+    .slot-machine {
+      display: none;
     }
 
     h1 {
@@ -310,6 +460,10 @@
   @media (max-width: 400px) {
     .game-info {
       display: none;
+    }
+
+    .color-picker {
+      justify-content: center;
     }
   }
 
