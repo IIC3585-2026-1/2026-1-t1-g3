@@ -2,45 +2,100 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Memory Game</title>
+  <title>Juego de Memoria</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="slot-machine slot-left" aria-hidden="true">
+  <div class="slot-window">
+    <div class="slot-reel">
+      <span>&lt;/&gt;</span>
+      <span>{ }</span>
+      <span>( )</span>
+      <span>JS</span>
+      <span>CSS</span>
+      <span>HTML</span>
+      <span>PY</span>
+      <span>GO</span>
+      <span>&lt;/&gt;</span>
+      <span>{ }</span>
+      <span>( )</span>
+      <span>JS</span>
+      <span>CSS</span>
+      <span>HTML</span>
+      <span>PY</span>
+      <span>GO</span>
+    </div>
+  </div>
+</div>
+
+<div class="slot-machine slot-right" aria-hidden="true">
+  <div class="slot-window">
+    <div class="slot-reel">
+      <span>++</span>
+      <span>#</span>
+      <span>/* */</span>
+      <span>TS</span>
+      <span>JAVA</span>
+      <span>RUBY</span>
+      <span>LISP</span>
+      <span>SQL</span>
+      <span>++</span>
+      <span>#</span>
+      <span>/* */</span>
+      <span>TS</span>
+      <span>JAVA</span>
+      <span>RUBY</span>
+      <span>LISP</span>
+      <span>SQL</span>
+    </div>
+  </div>
+</div>
 
 <div class="game">
-  <h1>Memory Game</h1>
+  <h1>Juego de Memoria de Lenguajes de Programación</h1>
+  <div class="game-info">
+    <p>Movimientos: <span id="moves">0</span></p>
+    <p>Matches: <span id="matches">0</span></p>
+    <p>Puntaje: <span id="score">0</span></p>
+    <button type="button" class="game-button">Reiniciar</button>
+  </div>
 
-  <div class="board">
-    <!--cards pair-->
-    <div class="card" data-symbol="dog">
-      <div class="inner">
-        <div class="front">❓</div>
-        <div class="back">dog</div>
-      </div>
-    </div>
+  <div class="score-track" aria-hidden="true">
+    <div class="score-fill"></div>
+  </div>
 
-    <div class="card" data-symbol="dog">
-      <div class="inner">
-        <div class="front">❓</div>
-        <div class="back">dog</div>
-      </div>
-    </div>
+  <fieldset class="color-picker">
+    <legend>Color de cartas</legend>
 
-        <div class="card" data-symbol="cat">
-      <div class="inner">
-        <div class="front">❓</div>
-        <div class="back">cat</div>
-      </div>
-    </div>
+    <input type="radio" name="card-color" id="card-color-violet" checked>
+    <label for="card-color-violet" class="color-swatch" title="Violeta"></label>
 
-    <div class="card" data-symbol="cat">
-      <div class="inner">
-        <div class="front">❓</div>
-        <div class="back">cat</div>
-      </div>
-    </div>
+    <input type="radio" name="card-color" id="card-color-mint">
+    <label for="card-color-mint" class="color-swatch" title="Menta"></label>
 
-    <!-- more cards pair -->
+    <input type="radio" name="card-color" id="card-color-ocean">
+    <label for="card-color-ocean" class="color-swatch" title="Océano"></label>
+
+    <input type="radio" name="card-color" id="card-color-orange">
+    <label for="card-color-orange" class="color-swatch" title="Naranja"></label>
+
+    <input type="radio" name="card-color" id="card-color-rose">
+    <label for="card-color-rose" class="color-swatch" title="Rosa"></label>
+
+    <input type="radio" name="card-color" id="card-color-lime">
+    <label for="card-color-lime" class="color-swatch" title="Lima"></label>
+  </fieldset>
+
+  <div class="board"></div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="win-notification" id="win-notification">
+  <div class="win-card">
+    <h2>¡Ganaste!</h2>
+    <p>¡Encontraste todos los pares!</p>
+    <p>Puntaje final: <span id="win-score">0</span></p>
+    <button type="button" class="game-button win-button">Reiniciar</button>
   </div>
 </div>
 
