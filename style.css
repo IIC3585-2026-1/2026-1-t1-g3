@@ -466,7 +466,15 @@
     }
 
     .color-picker {
+      display: none;
+    }
+
+    .color-picker {
       justify-content: center;
+    }
+
+    .score-track{
+      display: none;
     }
   }
 
