@@ -283,6 +283,23 @@
     font-weight: 700;
   }
 
+  #win-score {
+    background: linear-gradient(
+      90deg,
+      #b8ff6a 0%,
+      #7dff7a 20%,
+      #38ef7d 40%,
+      #00d26a 60%,
+      #00b894 80%,
+      #b8ff6a 100%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: rainbow-slide 2s linear infinite;
+  }
+
   .win-button {
     margin-top: 18px;
   }

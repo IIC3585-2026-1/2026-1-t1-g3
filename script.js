@@ -2,6 +2,7 @@ const board = document.querySelector(".board");
 const movesElement = document.querySelector("#moves");
 const matchesElement = document.querySelector("#matches");
 const scoreElement = document.querySelector("#score");
+const winScoreElement = document.querySelector("#win-score");
 const gameElement = document.querySelector(".game");
 const restartButton = document.querySelector(".game-button");
 const winRestartButton = document.querySelector(".win-button");
@@ -118,6 +119,7 @@ function showToast(message) {
 }
 
 function showWinNotification() {
+  winScoreElement.textContent = score;
   winNotificationElement.classList.add("show");
 }
 
@@ -128,6 +130,7 @@ function restartGame() {
   streak = 0;
   movesElement.textContent = moves;
   matchesElement.textContent = matches;
+  winScoreElement.textContent = score;
   updateScoreUI();
   resetTurn();
   winNotificationElement.classList.remove("show");
