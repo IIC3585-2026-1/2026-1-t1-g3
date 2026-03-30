@@ -149,6 +149,16 @@
   }
   
   /* Grid (board layout with 4 columns) */
+
+
+  .game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* We use the min function to make the game responsive */
+    --selected-main-color: var(--main-color);
+    width: min(100%, calc(4 * var(--card-size) + 3 * var(--gap) + 2rem));
+  }
   .game-info {
     display: flex;
     align-items: center;
@@ -474,14 +484,7 @@
     100% { background-position: 200% 50%; }
   }
   
-  .game {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* We use the min function to make the game responsive */
-    --selected-main-color: var(--main-color);
-    width: min(100%, calc(4 * var(--card-size) + 3 * var(--gap) + 2rem));
-  }
+
 
   .game:has(#card-color-violet:checked) { --selected-main-color: #6c5ce7; }
   .game:has(#card-color-mint:checked) { --selected-main-color: #00b894; }
